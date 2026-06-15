@@ -29,3 +29,40 @@ We went all-in on the Microsoft AI stack to ensure enterprise-grade safety, obse
 Helix isn't just an agent script—it's the **enterprise nervous system** required to run agents safely. By leveraging Azure AI Foundry for inference, Azure AI Content Safety for defense, Application Insights for observability, and our custom Microsoft IQ Grounding memory systems, we've demonstrated how to take autonomous multi-agent reasoning from a local sandbox to a highly resilient, cost-effective production deployment.
 
 *(Note: Telemetry data, tokens spent, and profiles shown in our demo logs are Synthetic Evaluation Logs used for demonstration compliance).*
+
+## 📐 High-Availability Architecture Diagram
+
+```mermaid
+graph TD
+    %% Tiers
+    subgraph Tier 1: Ingress Layer
+        A[Droplet 1: Helix Flow Gateway]
+    end
+
+    subgraph Tier 2: Swarm Core
+        B[Droplet 2: Helix Engine Master]
+    end
+
+    subgraph Tier 3: Edge Compute
+        C[Droplet 3: Local Ollama Node]
+    end
+
+    subgraph Microsoft Cloud
+        D[Azure AI Foundry: gpt-4o]
+        E[Azure App Insights: Telemetry]
+        F[Azure AI Content Safety]
+    end
+
+    %% Flow
+    User((User)) -->|HTTPS Prompt| A
+    A -->|Async Interceptor| F
+    F -->|Safe Payload| A
+    A -.->|OpenTelemetry Metrics| E
+    
+    A -->|Complex Intent <br> 15ms routing| D
+    A -->|Simple Intent <br> Fallback| C
+    
+    D --> B
+    C --> B
+    B -->|Foundry IQ Grounding| D
+```
