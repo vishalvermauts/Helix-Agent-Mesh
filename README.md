@@ -29,21 +29,21 @@ We went all-in on the Microsoft AI stack to ensure enterprise-grade safety, obse
 
 ---
 
-## 📊 How We Meet the Judging Criteria
+## 📊 Core Features & Capabilities
 
-### 1. Accuracy & Relevance (20%)
-We built a highly relevant solution for the Reasoning Agents track. Rather than just building a simple chat script, we built the **infrastructure** required to run reasoning agents accurately in production, explicitly utilizing Microsoft Foundry IQ for grounding.
+### 1. Production-Grade Accuracy
+We built the **infrastructure** required to run reasoning agents accurately in production. Rather than a simple chat wrapper, this system explicitly utilizes Microsoft Foundry IQ for grounding to ensure outputs remain strictly within enterprise parameters.
 
-### 2. Reasoning & Multi-step Thinking (20%)
+### 2. Multi-step Swarm Reasoning
 The system uses a highly decoupled 4-Tier topology. The **Helix Engine (Tier 2)** acts as a swarm master, breaking down complex tasks into sub-tasks (planner, triage, reconciliation), validating AST structures, and iterating upon code safely. The agents reason through multi-step workflows while bound by Foundry IQ constraints.
 
-### 3. Creativity & Originality (15%)
+### 3. Latency & Cost Optimization
 Instead of relying purely on LLMs for routing, we built an ultra-low latency **Helix Flow Gateway (Tier 1)** that calculates intent via closed-form NumPy matrices in under 15ms. If the matrix determines the task is simple, it instantly falls back to a **Tier 3 Edge Compute Node** (Local Qwen 3.6 Coder) to save API costs, reserving the heavy-duty Azure `gpt-4o` reasoning for complex intents.
 
-### 4. User Experience & Presentation (15%)
+### 4. Zero-Friction User Experience
 The architecture guarantees an exceptional user experience by ensuring high availability and lightning-fast response times. Background safety checks and OpenTelemetry tracing happen completely out-of-band so the user never experiences latency spikes. 
 
-### 5. Reliability & Safety (20%)
+### 5. Deep Reliability & Defense-in-Depth
 Safety is the core of this project. Untrusted user input is structurally isolated. Every prompt passes through **Azure AI Content Safety** middleware before being parsed. If Azure detects an injection attempt, the request is instantly killed, protecting the autonomous agents from being hijacked.
 
 ---
