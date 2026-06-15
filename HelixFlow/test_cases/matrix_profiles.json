@@ -1,0 +1,19 @@
+{
+    "description": "Synthetic Evaluation Logs for Demonstration Only - Microsoft Hackathon Mock Data",
+    "profiles": [
+        {
+            "id": "DEV-001",
+            "role": "Learner",
+            "repository": "REPO-ALPHA",
+            "mock_tokens_spent": 12500,
+            "cost_saved": 0.15
+        },
+        {
+            "id": "DEV-002",
+            "role": "Senior Developer",
+            "repository": "REPO-BETA",
+            "mock_tokens_spent": 84500,
+            "cost_saved": 2.45
+        }
+    ]
+}
